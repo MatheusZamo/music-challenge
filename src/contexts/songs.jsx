@@ -1,13 +1,7 @@
 import { createContext, useState } from "react"
-import { faker } from "@faker-js/faker"
+import { createRandomSong } from "../utils/create-random-song"
 
 const SongsContext = createContext()
-
-const createRandomSong = () => ({
-  id: faker.string.uuid(),
-  name: faker.music.songName(),
-  genre: faker.music.genre(),
-})
 
 const SongsProvider = ({ children }) => {
   const [songs, setSongs] = useState(() =>
@@ -27,20 +21,16 @@ const SongsProvider = ({ children }) => {
         )
       : songs
 
-  return (
-    <SongsContext.Provider
-      value={{
-        songs,
-        searchQuery,
-        setSearchQuery,
-        addSong,
-        clearSongs,
-        searchedSongs,
-      }}
-    >
-      {children}
-    </SongsContext.Provider>
-  )
+  const value = {
+    songs,
+    searchQuery,
+    setSearchQuery,
+    addSong,
+    clearSongs,
+    searchedSongs,
+  }
+
+  return <SongsContext.Provider value={value}>{children}</SongsContext.Provider>
 }
 
 export { SongsContext, SongsProvider }

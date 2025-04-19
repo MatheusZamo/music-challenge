@@ -2,12 +2,7 @@ import { useState } from "react"
 import { faker } from "@faker-js/faker"
 import { SongsProvider } from "./contexts/songs"
 import { useSongs } from "./hooks/songs"
-
-const createRandomSong = () => ({
-  id: faker.string.uuid(),
-  name: faker.music.songName(),
-  genre: faker.music.genre(),
-})
+import { createRandomSong } from "./utils/create-random-song"
 
 const Header = () => {
   const { clearSongs } = useSongs()
